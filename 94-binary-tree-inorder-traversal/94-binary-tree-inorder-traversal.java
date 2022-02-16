@@ -15,17 +15,23 @@
  */
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        // inorder traversal recursive solution 
+        // iterative inorder traversal 
+        // insert left in the stack until it gets null
+        // then remove and print the top of the stack
+        // then insert right in the stack
         List<Integer> inorder = new ArrayList<>();
-        inorderHelper(root, inorder);
+        Stack<TreeNode> st = new Stack<>();
+        TreeNode curr = root;
+        while(curr != null || !st.isEmpty()) {
+            // insert left in the stack until gets null
+            while(curr != null) {
+                st.push(curr);
+                curr = curr.left;
+            }
+            curr = st.pop();
+            inorder.add(curr.val);
+            curr = curr.right;
+        }
         return inorder;
-    }
-    
-    // left root right
-    public void inorderHelper(TreeNode node, List<Integer> inorder) {
-        if(node == null) return;
-        inorderHelper(node.left, inorder);
-        inorder.add(node.val);
-        inorderHelper(node.right, inorder);
     }
 }
