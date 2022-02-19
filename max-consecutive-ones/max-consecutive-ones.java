@@ -1,7 +1,7 @@
 class Solution {
     public int findMaxConsecutiveOnes(int[] nums) {
-        int c = 0;
-        int cnet = 0;
+        int c = 0; 
+        int cnet = 0; 
         for(int i = 0; i < nums.length; i++) {
             if(nums[i] == 1) {
                 c++;
@@ -13,3 +13,7 @@ class Solution {
         return Math.max(c, cnet);
     }
 }
+
+/*
+intuition : kadane's algorithm kind thing 
+first find c(curr count) then overall count;*/
