@@ -134,12 +134,12 @@ class Solution
         qq.add(node);
         while(qq.size() > 0) {
             int size = qq.size();
-            for(int i = 0; i < size; i++) {
-                Node rvnode = qq.poll();
+            
+            Node rvnode = qq.poll();
                 list.add(rvnode.data);
                 if(rvnode.left != null) qq.add(rvnode.left);
                 if(rvnode.right != null) qq.add(rvnode.right);
-            }
+            
         }
         return list;
     }
