@@ -24,13 +24,14 @@ class Solution {
         TreeNode curr = root;
         while(curr != null || !st.isEmpty()) {
             // insert left in the stack until gets null
-            while(curr != null) {
+            if(curr != null) {
                 st.push(curr);
                 curr = curr.left;
+            } else {
+                curr = st.pop();
+                inorder.add(curr.val);
+                curr = curr.right;
             }
-            curr = st.pop();
-            inorder.add(curr.val);
-            curr = curr.right;
         }
         return inorder;
     }
