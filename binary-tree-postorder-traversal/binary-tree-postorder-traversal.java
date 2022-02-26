@@ -19,23 +19,25 @@ class Solution {
         if(root == null) {
             return new ArrayList<>();
         }
-        List<Integer> postOrder = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         Stack<TreeNode> st = new Stack<>();
-        Stack<Integer> out = new Stack<>();
         st.push(root);
         while(!st.isEmpty()) {
-            TreeNode curr = st.pop();
-            out.push(curr.val);
-            if(curr.left != null) {
-                st.push(curr.left);
-            }
-            if(curr.right != null) {
-                st.push(curr.right);
+            TreeNode curr = st.peek();
+            if(curr.left == null && curr.right == null) {
+                TreeNode temp = st.pop();
+                list.add(temp.val);
+            } else {
+                if(curr.right != null) {
+                    st.push(curr.right);
+                    curr.right = null;
+                } 
+                if(curr.left != null) {
+                    st.push(curr.left);
+                    curr.left = null;
+                }
             }
         }
-        while(!out.isEmpty()) {
-            postOrder.add(out.pop());
-        }
-        return postOrder;
+        return list;
     }
 }
