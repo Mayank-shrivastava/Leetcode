@@ -125,20 +125,20 @@ class BinaryTree
     static ArrayList<Integer> preorder(Node root)
     {
         // Code here
+        // pre-order: root left right
+        Stack<Node> st = new Stack<>();
         ArrayList<Integer> list = new ArrayList<>();
-        preorderHelper(root, list);
-        return list;
-        
-    }
-    
-    static void preorderHelper(Node node, ArrayList<Integer> list) {
-        if(node == null) {
-            return;
+        st.push(root);
+        while(!st.isEmpty()) {
+            Node rv_node = st.pop();
+            list.add(rv_node.data);
+            if(rv_node.right != null) {
+                st.push(rv_node.right);
+            } 
+            if(rv_node.left != null) {
+                st.push(rv_node.left);
+            }
         }
-        // root left right
-        list.add(node.data);
-        preorderHelper(node.left, list);
-        preorderHelper(node.right, list);
+        return list;
     }
-
 }
