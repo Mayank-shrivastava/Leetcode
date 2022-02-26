@@ -118,24 +118,27 @@ class Solution {
     // Function to return the diameter of a Binary Tree.
     int diameter(Node root) {
         // Your code here
-        if(root == null) {
-            return 0;
-        }
-        
-        int ld = diameter(root.left);
-        int rd = diameter(root.right);
-        int sd = height(root.left) + height(root.right) + 1;
-        return Math.max(sd, Math.max(ld, rd));
-        
+        return diameterHelper(root).dia;
     }
     
-    int height(Node node) {
+    DiaPair diameterHelper(Node node) {
         if(node == null) {
-            return 0;
+            DiaPair bdp = new DiaPair();
+            bdp.ht = 0;
+            bdp.dia = 0;
+            return bdp;
         }
-        
-        int lh = height(node.left);
-        int rh = height(node.right);
-        return Math.max(lh, rh) + 1;
+        DiaPair ldp = diameterHelper(node.left);
+        DiaPair rdp = diameterHelper(node.right);
+        DiaPair sdp = new DiaPair();
+        sdp.ht = Math.max(ldp.ht, rdp.ht) + 1;
+        int sd = ldp.ht + rdp.ht + 1;
+        sdp.dia = Math.max(sd, Math.max(ldp.dia,rdp.dia));
+        return sdp;
     }
+}
+
+class DiaPair {
+    int ht; 
+    int dia;
 }
