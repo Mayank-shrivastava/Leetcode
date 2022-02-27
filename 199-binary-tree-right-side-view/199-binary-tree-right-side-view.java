@@ -24,9 +24,9 @@ class Solution {
         qq.add(root);
         while(!qq.isEmpty()) {
             int size = qq.size();
-            for(int i = 0; i < size; i++) {
+            for(int i = 1; i <= size; i++) {
                 TreeNode curr = qq.poll();
-                if(i == size - 1) list.add(curr.val);
+                if(i == size) list.add(curr.val);
                 if(curr.left != null) {
                     qq.add(curr.left);
                 }
