@@ -122,27 +122,24 @@ class Node
 class Tree
 {
     //Function to return list containing elements of left view of binary tree.
+    int prevLevel = 0;
     ArrayList<Integer> leftView(Node root)
     {
-        if(root == null) {
-            return new ArrayList<>();
-        }
+        //recursive
         ArrayList<Integer> list = new ArrayList<>();
-        Queue<Node> qq = new LinkedList<>();
-        qq.add(root);
-        while(!qq.isEmpty()) {
-            int size = qq.size();
-            for(int i = 1; i <= size; i++) {
-                Node curr = qq.poll();
-                if(i == 1) list.add(curr.data);
-                if(curr.left != null) {
-                    qq.add(curr.left);
-                }
-                if(curr.right != null) {
-                    qq.add(curr.right);
-                }
-            }
-        }
+        helper(root, 1, list);
         return list;
+    }
+    
+    void helper(Node node, int level, ArrayList<Integer> list) {
+        if(node == null) {
+            return;
+        }
+        if(prevLevel < level) {
+            list.add(node.data);
+            prevLevel = level;
+        }
+        helper(node.left, level+1, list);
+        helper(node.right, level+1, list);
     }
 }
