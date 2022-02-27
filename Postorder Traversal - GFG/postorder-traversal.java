@@ -128,18 +128,26 @@ class Tree
     ArrayList<Integer> postOrder(Node root)
     {
        // Your code goes here
+       // post order iterative : left right root
+       // using two stacks
+       Stack<Node> st = new Stack<>();
+       Stack<Integer> out = new Stack<>();
        ArrayList<Integer> list = new ArrayList<>();
-       helper(root, list);
-       return list;
+       st.push(root);
+       while(!st.isEmpty()) {
+           Node curr = st.pop();
+           out.push(curr.data);
+           if(curr.left != null) {
+               st.push(curr.left);
+           }
+           if(curr.right != null) {
+               st.push(curr.right);
+           }
+       }
+       while(!out.isEmpty()) {
+           list.add(out.pop());
+       }
        
-    }
-    
-    void helper(Node node, ArrayList<Integer> list) {
-        if(node == null) {
-            return;
-        }
-        helper(node.left, list);
-        helper(node.right, list);
-        list.add(node.data);
+       return list;
     }
 }
