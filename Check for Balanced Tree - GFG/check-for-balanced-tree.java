@@ -133,20 +133,20 @@ class Tree
     boolean isBalanced(Node root)
     {
 	// Your code here
-	      if(root == null) {
-	          return true;
-	      }
-	      int fact = Math.abs(height(root.left)-height(root.right));
-	      if(fact > 1) return false;
-	      return isBalanced(root.left) && isBalanced(root.right);
+	     return height(root) != -1;
+	      
     }
     
+    // optimized approach for this problem
     int height(Node node) {
         if(node == null) {
-            return -1;
+            return 0;
         }
         int lh = height(node.left);
+        if(lh == -1) return -1;
         int rh = height(node.right);
+        if(rh == -1) return -1;
+        if(Math.abs(lh-rh) > 1) return -1;
         return Math.max(lh, rh) + 1;
     }
 }
