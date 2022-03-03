@@ -8,18 +8,14 @@
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
-// iterative approach for reversing the linked list
 class Solution {
     public ListNode reverseList(ListNode head) {
-        ListNode prev = null;
-        ListNode curr = head;
-        while(curr != null) {
-            ListNode temp = curr.next;
-            curr.next = prev; //reverse the curr node
-            // traversing the pointer for reversing the further nodes
-            prev = curr;
-            curr = temp;
+        if(head == null || head.next == null) {
+            return head;
         }
-        return prev;
+        ListNode rest = reverseList(head.next); // get the rest of the ll 
+        head.next.next = head; // head ke next ka next head mtlb head ka next rest hai jiska next head hojaega
+        head.next = null; // haed ke next ko null krdo 
+        return rest;
     }
 }
