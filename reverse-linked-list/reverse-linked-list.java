@@ -14,6 +14,7 @@ class Solution {
             return head;
         }
         
+        // stack doing work while falling
         ListNode rest = reverseList(head.next);
         head.next.next = head;
         head.next = null;
