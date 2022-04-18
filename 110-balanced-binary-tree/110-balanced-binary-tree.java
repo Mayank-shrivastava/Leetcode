@@ -18,12 +18,11 @@ class Solution {
         if(root == null) {
             return true;
         }
-        int lh = ht(root.left);
-        int rh = ht(root.right);
-        if(Math.abs(lh-rh) > 1) return false;
-        boolean leftSubtree = isBalanced(root.left);
-        boolean rightSubtree = isBalanced(root.right);
-        return leftSubtree && rightSubtree;
+        
+        boolean leftB = isBalanced(root.left);
+        boolean rightB = isBalanced(root.right);
+        boolean sb = Math.abs(ht(root.left)-ht(root.right)) <= 1;
+        return leftB && rightB && sb;
     }
     
     public int ht(TreeNode root) {
