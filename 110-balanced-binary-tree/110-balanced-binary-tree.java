@@ -15,18 +15,25 @@
  */
 class Solution {
     public boolean isBalanced(TreeNode root) {
-        return ht(root) != -1;
+        return isBal(root).isbal;
     }
     
-    public int ht(TreeNode root) {
+    public BalancedPair isBal(TreeNode root) {
         if(root == null) {
-            return 0;
+            return new BalancedPair();
         }
-        int lh = ht(root.left);
-        if(lh == -1) return -1;
-        int rh = ht(root.right);
-        if(rh == -1) return -1;
-        if(Math.abs(lh-rh) > 1) return -1;
-        return Math.max(lh,rh)+1;
-    }
+        BalancedPair lbp = isBal(root.left);
+        BalancedPair rbp = isBal(root.right);
+        BalancedPair sbp = new BalancedPair();
+        sbp.ht = Math.max(lbp.ht, rbp.ht) + 1;
+        boolean sb = Math.abs(lbp.ht-rbp.ht) <= 1;
+        sbp.isbal = lbp.isbal && rbp.isbal && sb;
+        return sbp;
+    } 
+
+}
+
+class BalancedPair {
+    boolean isbal = true;
+    int ht = -1;
 }
