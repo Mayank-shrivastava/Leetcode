@@ -4,14 +4,18 @@ class Solution {
         HashMap<Integer, Long> map = new HashMap<>();
         for(int i = 0; i < nums.length; i++) {
             int gcd = gcd(nums[i],k);
-            int minPossibleMultiple = k/gcd;
+            int want = k/gcd;
             for(int ele : map.keySet()) {
-                if(ele % minPossibleMultiple == 0) {
+                if(ele % want == 0) {
                     count += map.get(ele);
+                    //System.out.println(i + "->" + count);
                 }
             }
             map.put(gcd, map.getOrDefault(gcd, 0L)+1L);
         }
+        // for(Map.Entry m : map.entrySet()) {
+        //     System.out.println(m.getKey() + "->" + m.getValue());
+        // }
         return count;
     }
     
