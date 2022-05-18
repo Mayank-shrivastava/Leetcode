@@ -13,11 +13,15 @@ class Solution {
             }
             if(map.containsKey(rem)) {
                 count += map.get(rem);
+                //System.out.println(i + "->" + count);
                 map.put(rem, map.get(rem)+1);
             } else {
                 map.put(rem,1);
             }
         }
+        // for(Map.Entry m: map.entrySet()) {
+        //     System.out.println(m.getKey() + "->" + m.getValue());
+        // }
         return count;
     }
 }
