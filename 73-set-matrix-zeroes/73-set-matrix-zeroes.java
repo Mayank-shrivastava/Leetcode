@@ -1,28 +1,46 @@
 class Solution {
     public void setZeroes(int[][] matrix) {
-        int r = matrix.length;
-        int c = matrix[0].length;
-        Set<Integer> rows = new HashSet<>();
-        Set<Integer> cols = new HashSet<>();
+        boolean isRow = false;
+        boolean isCol = false;
+        int r =  matrix.length;
+        int c =  matrix[0].length;
 
-        // traverse over the matrix
+        // check for first col that it contains zero or not
         for(int i = 0; i < r; i++) {
-            for(int j = 0; j < c; j++) {
-                // store in rows and cols if matrix[i][j] == 0;
+            if(matrix[i][0] == 0) isCol = true;
+        }
+        // check for first row
+        for(int j = 0; j < c; j++) {
+            if(matrix[0][j] == 0) isRow = true;
+        }
+
+        // traverse over the matrix check if matrix[i][j]==0 mark matrix[i][0] = 0 and matrix[0][j]=0
+        for(int i = 1; i < r; i++) {
+            for(int j = 1; j < c; j++) {
                 if(matrix[i][j] == 0) {
-                    rows.add(i); // add ith row
-                    cols.add(j); // add jth col
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
                 }
             }
         }
 
-        // next iteration over matrix
-        for(int i = 0; i < r; i++) {
-            for(int j = 0; j < c; j++) {
-                if(rows.contains(i) || cols.contains(j)) {
+        // marking of dummy done now look for dummy and set remaining positions to zeros
+        for(int i = 1; i < r; i++) {
+            for(int j = 1; j < c; j++) {
+                if(matrix[i][0] == 0 || matrix[0][j] == 0) {
                     matrix[i][j] = 0;
                 }
             }
+        }
+
+        // look for first row
+        if(isRow) {
+            for(int j = 0; j < c; j++) matrix[0][j] = 0;
+        }
+
+        // look for first col
+        if(isCol) {
+            for(int i = 0; i < r; i++) matrix[i][0] = 0;
         }
     }
 }
