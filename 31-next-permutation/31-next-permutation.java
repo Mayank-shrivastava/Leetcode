@@ -1,27 +1,32 @@
 class Solution {
     public void nextPermutation(int[] nums) {
-        int index1 = nums.length-2;
-        while(index1 >= 0 && nums[index1+1] <= nums[index1]) {
-            index1--;
+        // find the first decreasing number index from right
+        int i = nums.length-2;
+        while(i >= 0 && nums[i+1] <= nums[i]) {
+            i--;
         }
-        if(index1 >= 0) {
-            int index2 = nums.length-1;
-            // get the element greater than the nums[index1]
-            while(nums[index2] <= nums[index1]) {
-                index2--;
+        // here i gives the index of the first decreasing number
+        if(i >= 0) {
+            // now find the first number which is greater than nums[i]
+            int j = nums.length-1;
+            while(nums[j] <= nums[i]) {
+                j--;
             }
-            int temp = nums[index1];
-            nums[index1] = nums[index2];
-            nums[index2] = temp;
+            // nums[j] is the number which is greater than nums[i]
+            // swap nums[i] and nums[j]
+            int temp = nums[i];
+            nums[i] = nums[j];
+            nums[j] = temp;
         }
-        reverse(nums,index1+1, nums.length-1);
+        // reverse from i+1 to nums.length-1;
+        reverse(nums, i+1, nums.length-1);
     }
     
-    public static void reverse(int[] arr, int start, int end) {
-        while(start < end) {
-            int temp = arr[start];
-            arr[start] = arr[end];
-            arr[end] = temp;
+     public void reverse(int[] nums, int start, int end) {
+        while(start <= end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
             start++;
             end--;
         }
