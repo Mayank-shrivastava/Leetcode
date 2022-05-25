@@ -1,14 +1,11 @@
 class Solution {
     public int[][] merge(int[][] intervals) {
-       // sort intervals on the basis of start time
-        Arrays.sort(intervals, (a,b)-> Integer.compare(a[0], b[0]));
+        Arrays.sort(intervals, Comparator.comparingInt(a -> a[0]));
         LinkedList<int[]> merged = new LinkedList<>();
         for(int[] interval : intervals) {
             if(merged.isEmpty() || merged.getLast()[1] < interval[0]) {
-                // non-overlapping region
                 merged.add(interval);
             } else {
-                // overlapping region
                 merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]);
             }
         }
